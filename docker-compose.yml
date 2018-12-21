@@ -1,0 +1,25 @@
+version: '3.2'
+services:
+  reverse-proxy:
+    image: 
+
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: ingress
+
+  www:
+    image: nginx:latest
+    build:
+      context: ./../
+      dockerfile: ./build-config/my-blog-api/Dockerfile
+      args:
+        - mode=dev
+    volumes:
+      - ./www.hashiserver.com:/usr/share/nginx/html/
+  jewelc:
+    image: nginx:latest
+    volumes:
+      - ./jewelc.hashiserver.com:/usr/share/nginx/html/
+
